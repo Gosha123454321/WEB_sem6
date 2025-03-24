@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>История заказов</title>
+</head>
+<body>
+    <h1>История заказов</h1>
+    <ul>
+        {% for order in orders %}
+            <li>
+                Заказ от {{ order.created_at }} - ${{ order.total_price }}
+                <ul>
+                    {% for item in order.orderitem_set.all %}
+                        <li>{{ item.book.title }} - {{ item.quantity }} шт. - ${{ item.book.price }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'book_list' %}">Вернуться на главную</a>
+</body>
+</html>
